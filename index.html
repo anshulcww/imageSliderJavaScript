@@ -30,13 +30,9 @@
 	}
 	.slide{
 		margin-top: 10px;
-		position: absolute;
-		opacity: 0;
 		transition: all 200ms ease;
-
-	}
-	.slide.show{
-		opacity: 1;
+		display: none;
+		position: absolute;
 	}
 	.slider-nav {
 		text-align: center;
@@ -61,31 +57,57 @@
 		font-weight: bold;
 	}
 </style>
-<body>
+<body onload= "startSlideShow()">
 	<div class="container">
 		<div class="imageCont" id="imgCont">
-			<div class="slide show">
+			<div class="slide show" id="0">
 				<img src="images/img1.jpg" alt="first" width="1024px" height="600px">
 			</div>
-			<div class="slide">
+			<div class="slide" id="1">
 				<img src="images/img2.jpg" alt="second" width="1024px" height="600px">
 			</div>
-			<div class="slide">
+			<div class="slide" id="2">
 				<img src="images/img3.jpg" alt="third" width="1024px" height="600px">
 			</div>
-			<!-- <div class="slide">
+			<div class="slide" id="3">
 				<img src="images/img4.jpg" alt="fourth" width="1024px" height="600px">
-			</div> -->
+			</div>
 							
 		</div>	
 		<div class="slider-nav">
-			<button type="button" class="slider-previous">Previous</button>
+			<button type="button" class="slider-previous" id="previous">Previous</button>
 			<button type="button" class="slider-next">Next</button>
 		</div>	
 	</div>
 <script type="text/javascript">
-	var obj = document.getElementsByClassName('slide');
-	console.log(obj[0]);
+	function startSlideShow(){
+		/*setInterval(nextSlide, 2000);*/
+		nextSlide();
+	}
+	var slideIndex =0;
+	var imageArray = document.getElementsByClassName('slide');
+	function nextSlide(){
+		console.log(slideIndex);
+		
+		if(slideIndex>0){
+			document.getElementById(slideIndex-1).style.display = 'none';
+		}
+		
+		if(slideIndex==imageArray.length-1){
+			document.getElementById(slideIndex).style.display = 'none';	
+		}
+
+
+		if(slideIndex<imageArray.length-1){
+			slideIndex =slideIndex+1;	
+		}else{
+			slideIndex=0;
+			document.getElementById(slideIndex).style.display = 'none';	
+		}
+		document.getElementById(slideIndex).style.display = 'block';
+		setTimeout("nextSlide()",2000);
+	}
+	
 </script>
 
 </body>
