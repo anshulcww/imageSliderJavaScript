@@ -31,60 +31,64 @@
 	.slide{
 		margin-top: 10px;
 		transition: all 200ms ease;
-		display: none;
+		display: block;
 		position: absolute;
+		height: 600px;
+		width:1024px;
 	}
-	.slider-nav {
-		text-align: center;
+	.slider-radio{
 		position: absolute;
-		top:565px;
+		top:525px;
 		left:600px;
 	}
-
-	.slider-nav a {
-		display: inline-block;
-		text-decoration: none;
-		border: 1px solid #ddd;
-		color: #444;
-		width: 2em;
-		height: 2em;
-		line-height: 2;
-		text-align: center;	
-	}
-	.slider-nav a.current {
-		border-color: #000;
-		color: #000;
-		font-weight: bold;
-	}
+	
 </style>
 <body onload= "startSlideShow()">
 	<div class="container">
 		<div class="imageCont" id="imgCont">
-			<div class="slide show" id="0">
+			<div class="slide" >
+				<img id="currentImage" alt="first" width="1024px" height="600px">
+			</div>
+			<!-- <div class="slide show" id="0">
 				<img src="images/img1.jpg" alt="first" width="1024px" height="600px">
 			</div>
-			<div class="slide" id="1">
-				<img src="images/img2.jpg" alt="second" width="1024px" height="600px">
-			</div>
+			
 			<div class="slide" id="2">
 				<img src="images/img3.jpg" alt="third" width="1024px" height="600px">
 			</div>
 			<div class="slide" id="3">
 				<img src="images/img4.jpg" alt="fourth" width="1024px" height="600px">
-			</div>
+			</div> -->
 							
 		</div>	
-		<div class="slider-nav">
-			<button type="button" class="slider-previous" id="previous">Previous</button>
-			<button type="button" class="slider-next">Next</button>
+		<div class="slider-radio">
+			 	<input type="radio" name = "rdo" id = "radio1" />
+			    <input type="radio" name = "rdo" id = "radio2" />
+			    <input type="radio" name = "rdo" id = "radio3" />
+			    <input type="radio" name = "rdo" id = "radio4" />
 		</div>	
 	</div>
 <script type="text/javascript">
 	function startSlideShow(){
-		/*setInterval(nextSlide, 2000);*/
 		nextSlide();
 	}
-	var slideIndex =0;
+	var imageArray = ['images/img1.jpg', 'images/img2.jpg', 'images/img3.jpg','images/img4.jpg'];
+	var radioArray = document.getElementsByTagName('input');
+	console.log(radioArray);
+	var slideIndex = 0;
+	function nextSlide(){
+		document.getElementById('currentImage').src = imageArray[slideIndex];
+		radioArray[slideIndex].checked = true;
+
+		if(slideIndex<imageArray.length-1){
+			slideIndex= slideIndex+1;
+		}else{
+			slideIndex=0;
+		}
+		setTimeout("nextSlide()", 2000);
+
+	}
+	/*var slideIndex =0;
 	var imageArray = document.getElementsByClassName('slide');
 	function nextSlide(){
 		console.log(slideIndex);
@@ -106,7 +110,7 @@
 		}
 		document.getElementById(slideIndex).style.display = 'block';
 		setTimeout("nextSlide()",2000);
-	}
+	}*/
 	
 </script>
 
