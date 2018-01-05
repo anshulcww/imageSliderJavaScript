@@ -62,10 +62,10 @@
 							
 		</div>	
 		<div class="slider-radio">
-			 	<input type="radio" name = "rdo" id = "radio1" />
-			    <input type="radio" name = "rdo" id = "radio2" />
-			    <input type="radio" name = "rdo" id = "radio3" />
-			    <input type="radio" name = "rdo" id = "radio4" />
+			 	<input type="radio" name = "rdo" id = "0" onclick='nextSlide(this.id)'/>
+			    <input type="radio" name = "rdo" id = "1" onclick='nextSlide(this.id)'/>
+			    <input type="radio" name = "rdo" id = "2" onclick='nextSlide(this.id)'/>
+			    <input type="radio" name = "rdo" id = "3" onclick='nextSlide(this.id)'/>
 		</div>	
 	</div>
 <script type="text/javascript">
@@ -74,20 +74,28 @@
 	}
 	var imageArray = ['images/img1.jpg', 'images/img2.jpg', 'images/img3.jpg','images/img4.jpg'];
 	var radioArray = document.getElementsByTagName('input');
-	console.log(radioArray);
 	var slideIndex = 0;
-	function nextSlide(){
-		document.getElementById('currentImage').src = imageArray[slideIndex];
+	var timeout;
+		
+	function nextSlide(index){
+		if(parseInt(index) >=0){
+			slideIndex=parseInt(index);
+			clearTimeout(timeout);
+		}
+		else{
 		radioArray[slideIndex].checked = true;
+		}
+		document.getElementById('currentImage').src = imageArray[slideIndex];
 
 		if(slideIndex<imageArray.length-1){
 			slideIndex= slideIndex+1;
 		}else{
 			slideIndex=0;
 		}
-		setTimeout("nextSlide()", 2000);
+		timeout =setTimeout("nextSlide()", 3000);
 
 	}
+
 	/*var slideIndex =0;
 	var imageArray = document.getElementsByClassName('slide');
 	function nextSlide(){
